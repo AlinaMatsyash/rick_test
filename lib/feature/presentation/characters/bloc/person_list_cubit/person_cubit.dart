@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rickandmorty/feature/data/datasources/person_data_source.dart';
+import 'package:rickandmorty/feature/data/datasources/data_source.dart';
 import 'package:rickandmorty/feature/data/models/person_model.dart';
 
 part 'person_state.dart';

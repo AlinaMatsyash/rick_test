@@ -10,4 +10,8 @@ class ColorPalette {
   static var white = Color(0xffffffff);
   static var yellow = Colors.yellow;
   static var mainBackground = Color(0xff24282f);
+  static var grey_300 = Color(0xff5b6975);
+  static var grey_250 = Color(0xff6e798c);
+  static var bly = Color(0xff22a2bd);
+  static var bly1 = Color(0xff22A2BD);
 }

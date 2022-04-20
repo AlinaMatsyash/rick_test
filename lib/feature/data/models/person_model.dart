@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import 'location_model.dart';
-
 class PersonModel extends Equatable {
   final int id;
   final String name;
@@ -9,8 +7,8 @@ class PersonModel extends Equatable {
   final String species;
   final String type;
   final String gender;
-  final LocationModel origin;
-  final LocationModel location;
+  final LocModel origin;
+  final LocModel location;
   final String image;
   final List<String> episode;
   final DateTime created;
@@ -37,8 +35,8 @@ class PersonModel extends Equatable {
       species: json['species'],
       type: json['type'],
       gender: json['gender'],
-      origin: LocationModel.fromJson(json['origin']),
-      location: LocationModel.fromJson(json['location']),
+      origin: LocModel.fromJson(json['origin']),
+      location: LocModel.fromJson(json['location']),
       image: json['image'],
       episode:
           (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
@@ -76,4 +74,26 @@ class PersonModel extends Equatable {
         episode,
         created,
       ];
+}
+
+class LocModel extends Equatable {
+  final String name;
+  final String url;
+  const LocModel({required this.name, required this.url});
+  factory LocModel.fromJson(Map<String, dynamic> json) {
+    return LocModel(
+      name: json['name'],
+      url: json['url'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'url': url,
+    };
+  }
+
+  @override
+  List<Object?> get props => [name, url];
 }

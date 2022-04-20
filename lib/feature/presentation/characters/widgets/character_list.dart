@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rickandmorty/feature/data/models/person_model.dart';
-import 'package:rickandmorty/feature/presentation/bloc/person_list_cubit/person_cubit.dart';
-import 'package:rickandmorty/feature/presentation/widgets/person_card_widgets.dart';
+import 'package:rickandmorty/feature/presentation/characters/bloc/person_list_cubit/person_cubit.dart';
+import 'package:rickandmorty/feature/presentation/characters/widgets/character_card.dart';
 
-class PersonsList extends StatelessWidget {
+class CharacterList extends StatelessWidget {
   final scrollController = ScrollController();
 
-  PersonsList({Key? key}) : super(key: key);
+  CharacterList({Key? key}) : super(key: key);
   void setupScrollController(BuildContext context) {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
@@ -45,7 +45,7 @@ class PersonsList extends StatelessWidget {
             controller: scrollController,
             itemBuilder: (context, index) {
               if (index < persons.length) {
-                return PersonCard(person: persons[index]);
+                return CharacterCard(person: persons[index]);
               } else {
                 Timer(const Duration(milliseconds: 30), () {
                   scrollController
@@ -56,7 +56,7 @@ class PersonsList extends StatelessWidget {
             },
             separatorBuilder: (context, index) {
               return Divider(
-                color: Colors.grey[400],
+                color: Colors.grey[700],
               );
             },
             itemCount: persons.length + (isLoading ? 1 : 0));

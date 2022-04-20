@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:rickandmorty/feature/data/models/person_model.dart';
+import 'package:rickandmorty/feature/presentation/settings/widgets/change_theme_button_widget.dart';
+import 'package:rickandmorty/resources/icons.dart';
 import 'package:rickandmorty/theme/color_theme.dart';
 
-class PersonDetailPage extends StatelessWidget {
+class CharacterDetailPage extends StatelessWidget {
   final PersonModel person;
 
-  const PersonDetailPage({Key? key, required this.person}) : super(key: key);
+  const CharacterDetailPage({Key? key, required this.person}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: SvgPicture.asset(
+            MainIcons.stroke,
+            color: number ? ColorPalette.white : ColorPalette.black_600,
+            fit: BoxFit.scaleDown,
+          ),
+        ),
         elevation: 0,
-        backgroundColor: ColorPalette.black_600,
-        title: const Text('Character Details'),
+        title: Text(
+          'Character Details',
+          style: Theme.of(context).textTheme.headline6,
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -40,7 +55,6 @@ class PersonDetailPage extends StatelessWidget {
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 8.0,
@@ -59,12 +73,20 @@ class PersonDetailPage extends StatelessWidget {
                     const SizedBox(
                       width: 8.0,
                     ),
-                    Text(
-                      person.status,
-                      style: const TextStyle(color: Colors.white),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    Text(person.status,
+                        style: person.status == 'Alive'
+                            ? Theme.of(context).textTheme.overline
+                            : person.status == 'unknown'
+                                ? Theme.of(context)
+                                    .textTheme
+                                    .overline
+                                    ?.copyWith(color: ColorPalette.yellow)
+                                : person.status == 'Dead'
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .overline
+                                        ?.copyWith(color: ColorPalette.red)
+                                    : Theme.of(context).textTheme.overline),
                   ],
                 ),
                 const SizedBox(height: 20),
